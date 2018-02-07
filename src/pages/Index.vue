@@ -10,7 +10,10 @@
       <div class="submenu__item">使用豆瓣</div>
     </div>
 
-    <count></count>
+    <list mold="thumbnail" :items="events"></list>
+    <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">
+      loading...
+    </infinite-loading>
     <tabbar class="d-tabbar" v-model="select">
       <tabbar-item class="b-tabbar-item" v-for = "(item, index) in tabbarItemData" :key="index" v-bind:id="index">
         <span slot="icon">
@@ -23,10 +26,13 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 import tabbar from '../components/tabbar.vue'
 import tabbarItem from '../components/tabbar-item'
 import dbHeader from '../components/Header.vue'
-import count from '../components/count.vue'
+
+import List from '../components/List'
 
 export default {
   name: 'index',
@@ -34,7 +40,7 @@ export default {
     tabbar,
     tabbarItem,
     dbHeader,
-    count
+    List
   },
   data () {
     return {
@@ -59,7 +65,21 @@ export default {
       select: 'tab1'
     }
   },
+  computed: {
+    ...mapState({
+      events: state => state.activities.events
+    })
+  },
   methods: {
+    onInfinite () {
+      setTimeout(() => {
+        this.loadMore()
+        this.$ref.infiniteLoading.$emit('$InfiniteLoading:loaded')
+      }, 1000)
+    },
+    ...mapActions([
+      'loadMore'
+    ])
   },
   mounted () {
     console.log('test')

@@ -10,8 +10,8 @@
   </div>
 </template>
 <script>
-import store from '@/vuex/store'
-import { mapState, mapMutations } from 'vuex'
+import store from '../store/store.js'
+import { mapMutations } from 'vuex'
 export default {
   name: 'count',
   data () {
@@ -20,7 +20,7 @@ export default {
     }
   },
   store,
-  methods:mapMutations([
+  methods: mapMutations([
     'add', 'reduce'
   ])
 }
