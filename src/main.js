@@ -4,11 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-import element from 'element-ui'
+import ElementUI from 'element-ui'
 import './assets/default.scss'
 import './assets/theme/index.css'
 
-Vue.use(element)
+Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

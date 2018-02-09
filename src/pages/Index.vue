@@ -15,7 +15,6 @@
 
   </div>
 </template>
-
 <script>
 import { mapState, mapActions } from 'vuex'
 import InfiniteLoading from 'vue-infinite-loading'
@@ -39,7 +38,7 @@ export default {
     onInfinite () {
       setTimeout(() => {
         this.loadMore()
-        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
+        // this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
       }, 1000)
     },
     ...mapActions([
@@ -47,7 +46,6 @@ export default {
     ])
   },
   mounted () {
-    this.loadMore()
     console.log(this.events)
   }
 }
