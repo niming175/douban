@@ -1,8 +1,15 @@
 <template>
   <div class="list">
-    <div v-for="(item, index) in items" :key="index">
-      <h3>{{item.title}}</h3>
-      <p>{{item.content | subStr}}</p>
+    <div v-if="mold === 'thumbnail'" v-for="(item, index) in items" :key="index" >
+      <div class="list-content">
+        <div class="list__left">
+          <p class="list__title">{{item.title}}</p>
+          <p class="list__text">{{item.content}}</p>
+          <span class="list__tag"></span>
+        </div>
+        <div class="list__right">
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -21,7 +28,12 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      testitems: this.items
+    }
+  },
+  mounted () {
+    console.log(this.testitems)
   }
   // filters: {
   //   subStr: function (value) {

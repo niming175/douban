@@ -1,12 +1,12 @@
 <!-- 头部的组件 -->
 <template>
 <div class="db-header">
-  <div class="db-header__logo">豆瓣</div>
+  <a href="/"><div class="db-header__logo">豆瓣</div></a>
   <div class="db-header__menu">
-    <span>电影</span>
-    <span>图书</span>
+    <a href="/movie"><span>电影</span></a>
+    <a href="/book"><span>图书</span></a>
     <span>广播</span>
-    <span>小组</span>
+    <a href="/login"><span>小组</span></a>
   </div>
   <div class="db-header__search-btn">
     <i class="el-icon-search"></i>
@@ -35,6 +35,7 @@ export default {
     padding: px(8) px(15);
     width: 100%;
     border-bottom: 1px solid #efefef;
+    background: #fff;
     &__logo {
       font-size: 30px;
       font-weight: 600;

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <db-header></db-header>
     <div class="submenu">
       <div class="submenu__item">影院热映</div>
       <div class="submenu__item">华语碟榜</div>
@@ -9,61 +8,27 @@
       <div class="submenu__item">豆瓣时间</div>
       <div class="submenu__item">使用豆瓣</div>
     </div>
-
     <list mold="thumbnail" :items="events"></list>
     <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">
-      loading...
+      loading
     </infinite-loading>
-    <tabbar class="d-tabbar" v-model="select">
-      <tabbar-item class="b-tabbar-item" v-for = "(item, index) in tabbarItemData" :key="index" v-bind:id="index">
-        <span slot="icon">
-          <i class="d-tabbar__icon" :class="item.icon"></i>
-        </span>
-        {{item.name}}
-      </tabbar-item>
-    </tabbar>
+
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
-
-import tabbar from '../components/tabbar.vue'
-import tabbarItem from '../components/tabbar-item'
-import dbHeader from '../components/Header.vue'
-
+import InfiniteLoading from 'vue-infinite-loading'
 import List from '../components/List'
 
 export default {
   name: 'index',
   components: {
-    tabbar,
-    tabbarItem,
-    dbHeader,
+    InfiniteLoading,
     List
   },
   data () {
-    return {
-      tabbarItemData: [
-        {
-          name: '首页',
-          icon: 'el-icon-menu'
-        }, {
-          name: '影音',
-          icon: 'el-icon-service'
-        }, {
-          name: '广播',
-          icon: 'el-icon-mobile-phone'
-        }, {
-          name: '小组',
-          icon: 'el-icon-tickets'
-        }, {
-          name: '我的',
-          icon: 'el-icon-mobile-phone'
-        }
-      ],
-      select: 'tab1'
-    }
+    return {}
   },
   computed: {
     ...mapState({
@@ -74,7 +39,7 @@ export default {
     onInfinite () {
       setTimeout(() => {
         this.loadMore()
-        this.$ref.infiniteLoading.$emit('$InfiniteLoading:loaded')
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
       }, 1000)
     },
     ...mapActions([
@@ -82,7 +47,8 @@ export default {
     ])
   },
   mounted () {
-    console.log('test')
+    this.loadMore()
+    console.log(this.events)
   }
 }
 </script>

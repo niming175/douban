@@ -3,19 +3,19 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import ElementUI from 'element-ui'
-import './assets/theme/index.css'
+import store from './store'
+import element from 'element-ui'
 import './assets/default.scss'
+import './assets/theme/index.css'
 
-Vue.use(ElementUI)
-
+Vue.use(element)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
-  template: '<App/>',
-  render: h => h(App)
+  template: '<App/>'
 })

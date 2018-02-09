@@ -1,21 +1,34 @@
-import request from 'superagent'
+// import request from 'superagent'
+// import jsonp from 'superagent-jsonp'
+import axios from 'axios'
 
+const state = {
+  events: [],
+  skip: 0
+}
 const actions = {
-	loadMore ({commit, state}) {
-    request
-      .get(`'https://api.douban.com/v2/event/list?loc=108288&start=${state.skip}&count=3`)
-      .use(jsonp)
-      .end((err, res) => {
-        if (!err) {
-          commit({
-            type: 'loadMore',
-            res: res.body.event
-          })
-        }
+  loadMore ({commit, state}) {
+    console.log('test')
+    axios
+      .get(`/api/event/list?loc=108288&start=${state.skip}&count=3`)
+      .then(function (res) {
+        commit({
+          type: 'loadMore',
+          res: res.data
+        })
       })
+      .catch(function (err) { console.log(err) })
+  }
+}
+const mutations = {
+  loadMore (state, payload) {
+    state.skip += 3
+    state.events = state.events.concat(payload.res.events)
   }
 }
 
 export default {
-  actions
+  state,
+  actions,
+  mutations
 }
