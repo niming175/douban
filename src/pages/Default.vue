@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="default">
     <db-header></db-header>
     <router-view></router-view>
   </div>
@@ -16,6 +16,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  @function px($n) {
+    @return ($n / 37.5)+rem;
+  }
+  .default {
+    margin-top: px(44)
+  }
 </style>
