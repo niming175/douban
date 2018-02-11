@@ -12,7 +12,6 @@
     <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">
       loading
     </infinite-loading>
-
   </div>
 </template>
 <script>
@@ -46,7 +45,6 @@ export default {
     ])
   },
   mounted () {
-    console.log(this.events)
   }
 }
 </script>

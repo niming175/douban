@@ -48,8 +48,7 @@ export default {
     this.$store.dispatch({
       type: 'getSingleEvent',
       id: id
-    }).then( function (res) {
-    }).catch( function (err) {
+    }).then(function (res) {
     })
   }
 }

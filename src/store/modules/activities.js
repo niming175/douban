@@ -1,5 +1,3 @@
-// import request from 'superagent'
-// import jsonp from 'superagent-jsonp'
 import axios from 'axios'
 
 const state = {
@@ -50,6 +48,7 @@ const mutations = {
   loadMore (state, payload) {
     state.skip += 3
     state.events = state.events.concat(payload.res.events)
+    console.log(state.events)
   },
   getSingleEvent (state, payload) {
     state.eventItem = payload.res

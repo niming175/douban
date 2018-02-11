@@ -47,7 +47,6 @@ export default {
     // 去掉html的标签
     subStr: function (value, n) {
       let newVal = value.replace(/<.*?>/g, '')
-      console.log(newVal)
       return newVal.slice(0, n)
     }
   }

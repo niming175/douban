@@ -9,14 +9,20 @@
     <a href="/login"><span>小组</span></a>
   </div>
   <div class="db-header__search-btn">
-    <i class="el-icon-search"></i>
+    <i class="el-icon-search" @click="showSearch"></i>
   </div>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'dbHeader'
+  name: 'dbHeader',
+  methods: {
+    showSearch: function () {
+      console.log('test')
+      this.$emit('showSearch')
+    }
+  }
 }
 </script>
 
