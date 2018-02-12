@@ -7,6 +7,7 @@ import Login from '../pages/Login'
 import Default from '../pages/Default'
 import Detail from '../pages/Detail' // 文章详情页
 import SearchResPage from '../pages/SearchResPage.vue' // 搜索结果页面
+import Subject from '../pages/Subject.vue' // 搜索后点击查看的详情
 
 Vue.use(Router)
 
@@ -35,6 +36,10 @@ export default new Router({
       path: '/res',
       name: 'SearchResPage',
       component: SearchResPage
+    }, {
+      path: '/:classify/subject/:id',
+      name: 'Subject',
+      component: Subject
     }]
   }, {
     path: '/login',
