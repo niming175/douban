@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import rate from '../components/rate.vue'
+import rate from '../components/Rate.vue'
 export default {
   name: 'group',
   props: {
