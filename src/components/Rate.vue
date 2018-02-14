@@ -31,3 +31,10 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .rate {
+    .el-rate {
+      height: auto;
+    }
+  }
+</style>

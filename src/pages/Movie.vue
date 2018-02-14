@@ -1,7 +1,6 @@
 <template>
-  <div>
-    this is the page of movie
-    <scroller title="热门电影" type="hasCover" :items="hotMovie.subjects"></scroller>
+  <div class="movie">
+    <scroller title="影院热映" type="hasCover" :items="hotMovie.subjects" class="movie__hot-movie"></scroller>
   </div>
 </template>
 
@@ -29,3 +28,14 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @function px($n) {
+    @return ($n / 37.5)+rem;
+  }
+  .movie {
+    padding-top: px(8);
+    &__hot-movie {
+    }
+  }
+</style>
