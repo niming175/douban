@@ -1,6 +1,6 @@
 <!-- 搜索后的详情页 -->
 <template>
-  <div class="subject">
+  <div class="subject" v-if="subject">
     <banner></banner>
     <div class="subject__body">
       <div class="subject__title">{{subject.title}}</div>
@@ -20,7 +20,7 @@
           <img :src="subject.images.small" alt="">
         </div>
       </div>
-      <div class="subject__btn-inner">
+      <div class="subject__btn-inner" v-if="classify == 'movie'">
         <el-row :gutter="20">
           <el-col :span="12">
             <a href="/login" class="subject__btn-1">想看</a>
@@ -29,8 +29,21 @@
             <a href="/login" class="subject__btn-1">看过</a>
           </el-col>
         </el-row>
+        <a href="/login" class="subject__btn-2">在APP上保留你的足迹</a>
       </div>
-      <a href="/login" class="subject__btn-2">在APP上保留你的足迹</a>
+      <div class="subject__btn-inner" v-if="classify == 'book'">
+        <el-row :gutter="10">
+          <el-col :span="8">
+            <a href="/login" class="subject__btn-1">想读</a>
+          </el-col>
+          <el-col :span="8">
+            <a href="/login" class="subject__btn-1">再读</a>
+          </el-col>
+          <el-col :span="8">
+            <a href="/login" class="subject__btn-1">读过</a>
+          </el-col>
+        </el-row>
+      </div>
     </div>
   </div>
 </template>
@@ -46,6 +59,11 @@ export default {
     banner,
     rate
   },
+  data () {
+    return {
+      classify: this.$route.params.classify
+    }
+  },
   computed: {
     ...mapState({
       subject: state => state.subject.subject
@@ -59,7 +77,8 @@ export default {
 
   created () {
     const id = this.$route.params.id
-    const classify = this.$route.params.classify // 类型
+    // const classify = this.$route.params.classify // 类型
+    let classify = this.classify
     console.log(id)
     this.$store.dispatch({
       type: 'getSingleSubject',
