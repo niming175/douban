@@ -2,7 +2,7 @@
 <template>
   <div class="subject" v-if="subject">
     <banner></banner>
-    <div class="subject__body">
+    <div class="subject__body" v-if="!showLoading">
       <div class="subject__title">{{subject.title}}</div>
       <div class="subject__content">
         <div class="subject__desc">
@@ -45,6 +45,7 @@
         </el-row>
       </div>
     </div>
+    <loading v-if="showLoading"></loading>
   </div>
 </template>
 
@@ -52,16 +53,19 @@
 import { mapState, mapGetters } from 'vuex'
 import banner from '../components/Banner01.vue'
 import rate from '../components/Rate.vue'
+import loading from '../components/Loading.vue' // loading 等待动画
 
 export default {
   name: 'subject',
   components: {
     banner,
-    rate
+    rate,
+    loading
   },
   data () {
     return {
-      classify: this.$route.params.classify
+      classify: this.$route.params.classify,
+      showLoading: true
     }
   },
   computed: {
@@ -84,8 +88,8 @@ export default {
       type: 'getSingleSubject',
       id: id,
       classify: classify
-    }).then(function (res) {
-      console.log(res)
+    }).then(res => {
+      this.showLoading = false
     })
   }
 }

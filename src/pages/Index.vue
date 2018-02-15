@@ -10,7 +10,7 @@
     </div>
     <list mold="thumbnail" :items="events"></list>
     <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">
-      loading
+      <loading slot="spinner"></loading>
     </infinite-loading>
   </div>
 </template>
@@ -18,12 +18,14 @@
 import { mapState, mapActions } from 'vuex'
 import InfiniteLoading from 'vue-infinite-loading'
 import List from '../components/List'
+import loading from '../components/Loading'
 
 export default {
   name: 'index',
   components: {
     InfiniteLoading,
-    List
+    List,
+    loading
   },
   data () {
     return {}
@@ -37,7 +39,7 @@ export default {
     onInfinite () {
       setTimeout(() => {
         this.loadMore()
-        // this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
       }, 1000)
     },
     ...mapActions([
