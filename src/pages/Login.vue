@@ -1,86 +1,86 @@
 <template>
-  <div>
-    <p>Login</p>
-    <el-form :model="loginForm" :rules="checkRule" ref="loginForm" >
-      <el-form-item label="邮箱" prop="email">
-        <el-input type="email" v-model="loginForm.email" auto-complete="off"></el-input>
-      </el-form-item>
-
-      <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="loginForm.password" auto-complete="off"></el-input>
-      </el-form-item>
-
-      <el-form-item label="确认密码" prop="confPass">
-        <el-input type="password" v-model="loginForm.confPass" auto-complete="off"></el-input>
-      </el-form-item>
-    </el-form>
-
-    <el-button type="primary" @click="login('loginForm')" :disabled="valid">Login</el-button>
+  <div class="login">
+    <div class="login__header header">
+      <span class="header__cancel-btn">取消</span>
+      <span class="header__title">登陆豆瓣</span>
+    </div>
+    <div class="login__body">
+      <input type="text" placeholder="手机号 / 邮箱" class="login__input-phone" />
+      <input type="password" placeholder="Token" class="login__input-pws" />
+      <button class="login__btn">登陆</button>
+      <div class="login__use-other">
+        <a href="">使用其他方式登陆</a> &amp;
+        <a href="">找回密码</a>
+      </div>
+    </div>
+    <div class="login__footer">
+      <a href="">注册豆瓣账号</a>
+      <a href="">下载豆瓣App</a>
+    </div>
   </div>
 </template>
-<script>
-import AsyncValidator from 'async-validator'
 
+<script>
 export default {
-  name: 'login',
-  data () {
-    var checkPass = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('密码不能为空'))
-      } else if (value.length < 6 || value.length > 18) {
-        return callback(new Error('密码长度在6-18之间'))
-      } else {
-        callback()
-      }
-    }
-    var checkPass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'))
-      } else if (value !== this.loginForm.password) {
-        callback(new Error('两次输入密码不一致!'))
-      } else {
-        callback()
-      }
-    }
-    return {
-      loginForm: {
-        email: '',
-        password: '',
-        confPass: ''
-      },
-      checkRule: {
-        email: [
-          { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-          { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur, change' }
-        ],
-        password: { validator: checkPass, trigger: 'blur, change' },
-        confPass: { validator: checkPass2, trigger: 'blur, change' }
-      }
-    }
-  },
-  methods: {
-    login (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-    }
-  },
-  computed: {
-    valid: function () {
-      let validator = new AsyncValidator(this.checkRule)
-      let result = false
-      validator.validate(this.loginForm, (errors) => {
-        if (!errors) {
-          result = true
-        }
-      })
-      return result
-    }
-  }
+  name: 'login'
 }
 </script>
+
+<style lang="scss" scopd>
+  @function px($n) {
+    @return ($n / 37.5)+rem;
+  }
+  .login {
+    &__header {
+      height: px(48);
+      text-align: center;
+      line-height: px(48);
+      border: 1px solid #efefef;
+    }
+    .header {
+      position: relative;
+      &__cancel-btn {
+        position: absolute;
+        top: 0;
+        line-height: px(48);
+        left: px(15);
+      }
+      &__title {
+        font-weight: 600;
+      }
+    }
+    &__body {
+      margin-top: px(30);
+      padding: 0 px(20);
+      input {
+        display: block;
+        width: 100%;
+        padding: px(8) px(8);
+        height: px(52);
+        font-size: px(14);
+        border-color: #ccc;
+        border-style: solid;
+        border-width: 1px;
+      }
+    }
+    .login__input-phone {
+      border-radius: px(3) px(3) 0 0;
+      border-bottom: none;
+    }
+    .login__input-pws {
+      border-radius: 0 0 px(3) px(3);
+      border-top: -1px;
+    }
+    &__btn {
+      margin-top: px(16);
+      width: 100%;
+      padding: px(10);
+      font-size: px(18);
+      text-align: center;
+      color: #fff;
+      background: #17AA52;
+      border: 0.1rem solid #17AA52;
+      border-radius: px(3);
+    }
+  }
+</style>
