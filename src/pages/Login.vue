@@ -5,24 +5,78 @@
       <span class="header__title">登陆豆瓣</span>
     </div>
     <div class="login__body">
-      <input type="text" placeholder="手机号 / 邮箱" class="login__input-phone" />
-      <input type="password" placeholder="Token" class="login__input-pws" />
-      <button class="login__btn">登陆</button>
+      <form @submit.prevent="onSubmit()">
+        <input type="text" v-model="email" name="email" @input="updateInfo" placeholder="手机号 / 邮箱" class="login__input-phone" />
+        <input type="password" v-model="token" name="token" @input="updateInfo" placeholder="Token" class="login__input-pws" />
+        <button class="login__btn">登陆</button>
+      </form>
       <div class="login__use-other">
         <a href="">使用其他方式登陆</a> &amp;
         <a href="">找回密码</a>
       </div>
     </div>
     <div class="login__footer">
-      <a href="">注册豆瓣账号</a>
-      <a href="">下载豆瓣App</a>
+      <a href="">注册豆瓣账号</a>&nbsp;&nbsp;<a href="">下载豆瓣App</a>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'login'
+  name: 'login',
+  computed: {
+    ...mapState({
+      email: state => state.userInfo.temp_email,
+      token: state => state.userInfo.temp_token
+    })
+  },
+  methods: {
+    // 动态输入
+    updateInfo (e) {
+      console.log(e)
+      this.$store.commit({
+        type: 'updateInfo',
+        name: e.target.name,
+        value: e.target.value
+      })
+    },
+    onSubmit () {
+      this.$store.dispatch({
+        type: 'login',
+        email: this.email,
+        token: this.token
+      }).then(res => {
+        this.onSuccess()
+      })
+    },
+    // 登陆成功
+    onSuccess () {
+      this.$router.push({name: 'Status'})
+    },
+    onError () {
+      alert('error')
+    }
+  },
+  // 路由钩子， 在进入之前，判断是否在线
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      console.log(vm)
+      if (vm.$store.getters.currentUser.email) {
+        vm.$router.push({name: 'Status'})
+      } else {
+        next()
+      }
+    })
+  },
+  created () {
+    // 判断是否已经是登陆状态，是的话，直接跳转到下一个页面
+    if (localStorage.getItem('email')) {
+      this.$store.commit({
+        type: 'getUserInfo'
+      })
+    }
+  }
 }
 </script>
 
@@ -44,6 +98,8 @@ export default {
         top: 0;
         line-height: px(48);
         left: px(15);
+        color: #42bd56;
+        font-size: px(14);
       }
       &__title {
         font-weight: 600;
@@ -81,6 +137,21 @@ export default {
       background: #17AA52;
       border: 0.1rem solid #17AA52;
       border-radius: px(3);
+    }
+    &__use-other {
+      margin-top: px(20);
+      font-size: px(13);
+      color: #aaa;
+      a {
+        color: #aaa;
+      }
+    }
+    &__footer {
+      margin-top: px(20);
+      font-size: px(13);
+      a {
+        color: #42bd56;
+      }
     }
   }
 </style>

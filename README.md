@@ -56,3 +56,4 @@ npm test
 [flex 菜鸟教程](http://www.runoob.com/w3cnote/flex-grammar.html)  
 [BEM class命名规范](https://www.w3cplus.com/css/bem-definitions.html)  
 [Scss 样式应用](https://www.sass.hk/)  
+[beforerouteenter - 导航守卫](https://router.vuejs.org/zh-cn/advanced/navigation-guards.html)  
