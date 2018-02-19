@@ -5,8 +5,8 @@
   <div class="db-header__menu">
     <a href="/movie"><span>电影</span></a>
     <a href="/book"><span>图书</span></a>
-    <span>广播</span>
-    <a href="/login"><span>小组</span></a>
+    <a href="/status"><span>广播</span></a>
+    <a href="/group"><span>小组</span></a>
   </div>
   <div class="db-header__search-btn">
     <i class="el-icon-search" @click="showSearch"></i>

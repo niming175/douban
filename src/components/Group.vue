@@ -10,12 +10,13 @@
           :to="{
             name: 'Subject',
             params: {
-              classify: item.subtype ? item.subtype : 'book',
+              classify: tag,
               id: item.id
             }}">
           <div class="group-list">
             <div class="group-list__img">
-              <img :src="item.images.small" alt="">
+              <img :src="item.images.small" alt="" v-if="title != '音乐'">
+              <img :src="item.image" alt="" v-if="title == '音乐'">
             </div>
             <div class="group-list__desc">
               <div class="group-list__title">
@@ -50,7 +51,9 @@ export default {
       required: true
     },
     items: {
-      type: Array,
+      required: true
+    },
+    tag: {
       required: true
     }
   },

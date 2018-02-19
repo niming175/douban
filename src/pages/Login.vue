@@ -70,7 +70,7 @@ export default {
     })
   },
   created () {
-    // 判断是否已经是登陆状态，是的话，直接跳转到下一个页面
+    // 判断是否已经是登陆状态
     if (localStorage.getItem('email')) {
       this.$store.commit({
         type: 'getUserInfo'

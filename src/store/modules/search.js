@@ -10,8 +10,13 @@ const mutations = {
   search (state, payload) {
     switch (payload.tag) {
       case 'movie':
-        console.log(payload.res)
         state.res_movie = payload.res
+        break
+      case 'book':
+        state.res_book = payload.res
+        break
+      case 'music':
+        state.res_music = payload.res
         break
       default:
         console.log('have error')
@@ -21,13 +26,14 @@ const mutations = {
 
 const actions = {
   search ({ commit }, payload) {
+    console.log(payload)
     axios
-      .get(`/api/movie/search?q=${payload.word}&count=3`)
+      .get(`/api/${payload.tag}/search?q=${payload.word}&count=3`)
       .then(function (res) {
         console.log(res)
         commit({
           type: 'search', // 类型
-          tag: 'movie', // 标签
+          tag: payload.tag, // 标签
           res: res.data
         })
       })

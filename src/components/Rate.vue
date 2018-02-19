@@ -14,12 +14,9 @@
 <script>
 export default {
   name: 'rate',
-  props: {
-    rate: {
-      type: String,
-      required: true
-    }
-  },
+  props: [
+    'rate'
+  ],
   data () {
     return {
       rateValue: 0
@@ -27,7 +24,6 @@ export default {
   },
   created () {
     this.rateValue = parseInt(this.rate) / 2
-    console.log(this.rateValue)
   }
 }
 </script>
