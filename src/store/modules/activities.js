@@ -7,21 +7,20 @@ const state = {
 }
 const actions = {
   loadMore ({ commit, state }) {
-    console.log('test')
-    axios
-      .get(`/api/event/list?loc=108288&start=${state.skip}&count=3`)
-      .then(function (res) {
-        commit({
-          type: 'loadMore',
-          res: res.data
+    return new Promise(function (resolve, reject) {
+      axios
+        .get(`/api/event/list?loc=108288&start=${state.skip}&count=3`)
+        .then(function (res) {
+          commit({
+            type: 'loadMore',
+            res: res.data
+          })
+          resolve(res)
         })
-      })
-      .catch(function (err) {
-        commit({
-          type: 'loadMore',
-          res: err.response
+        .catch(function (err) {
+          reject(err)
         })
-      })
+    })
   },
   /*
    * 获取单篇文章详情
@@ -48,7 +47,6 @@ const mutations = {
   loadMore (state, payload) {
     state.skip += 3
     state.events = state.events.concat(payload.res.events)
-    console.log(state.events)
   },
   getSingleEvent (state, payload) {
     state.eventItem = payload.res

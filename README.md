@@ -57,3 +57,4 @@ npm test
 [BEM class命名规范](https://www.w3cplus.com/css/bem-definitions.html)  
 [Scss 样式应用](https://www.sass.hk/)  
 [beforerouteenter - 导航守卫](https://router.vuejs.org/zh-cn/advanced/navigation-guards.html)  
+[Promise.resolve()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)  

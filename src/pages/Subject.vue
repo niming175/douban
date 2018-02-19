@@ -1,6 +1,6 @@
 <!-- 搜索后的详情页 -->
 <template>
-  <div class="subject" v-if="subject">
+  <div class="subject">
     <banner></banner>
     <div class="subject__body" v-if="!showLoading">
       <div class="subject__title">{{subject.title}}</div>

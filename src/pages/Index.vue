@@ -9,13 +9,22 @@
       <div class="submenu__item">使用豆瓣</div>
     </div>
     <list mold="thumbnail" :items="events"></list>
-    <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">
+    <infinite-loading @infinite="onInfinite">
+      <!-- 等待 -->
       <loading slot="spinner"></loading>
+      <!-- 没有更多内容 -->
+      <span slot="no-more">
+        没有更多内容了
+      </span>
+      <!-- 没有相过结果，或者接口出错 -->
+      <span slot="no-results">
+        没有相过结果
+      </span>
     </infinite-loading>
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import InfiniteLoading from 'vue-infinite-loading'
 import List from '../components/List'
 import loading from '../components/Loading'
@@ -36,15 +45,19 @@ export default {
     })
   },
   methods: {
-    onInfinite () {
-      setTimeout(() => {
-        this.loadMore()
-        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
-      }, 1000)
-    },
-    ...mapActions([
-      'loadMore'
-    ])
+    // 加载方式最新方式采用$state控制
+    onInfinite ($state) {
+      this.$store.dispatch({
+        type: 'loadMore'
+      }).then(res => {
+        $state.loaded() // 继续加载
+      }).catch(function () {
+        $state.complete() // 停止加载
+      })
+    }
+    // ...mapActions([
+    //   'loadMore'
+    // ])
   },
   mounted () {
   }

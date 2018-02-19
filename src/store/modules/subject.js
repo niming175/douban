@@ -42,7 +42,6 @@ const actions = {
     return new Promise(function (resolve, reject) {
       switch (payload.classify) {
         case 'movie':
-          console.log(payload)
           axios
             .get(`/api/${payload.classify}/subject/${payload.id}`)
             .then(function (res) {
@@ -65,6 +64,7 @@ const actions = {
                 classify: payload.classify,
                 res: res.data
               })
+              resolve(res)
             })
       }
     })
