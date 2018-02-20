@@ -2,7 +2,8 @@
 import axios from 'axios'
 
 const state = {
-  novel: []
+  novel: [],
+  reality: []
 
 }
 const mutations = {
@@ -11,25 +12,33 @@ const mutations = {
       case 'novel':
         state.novel = payload.res
         break
+      case 'reality':
+        state.reality = payload.res
+        break
     }
   }
 }
 const actions = {
   getBook ({ commit }) {
-    // 虚构类
-    axios
-      .get('/api/book/search?q=虚构类&count=8')
-      .then(function (res) {
-        console.log(res)
-        commit({
-          type: 'getBook',
-          tag: 'novel',
-          res: res.data
+    let arr = [{
+      api: '/api/book/search?q=虚构类&count=8',
+      tag: 'novel'
+    }, {
+      api: '/api/book/search?q=非虚构类&count=8',
+      tag: 'reality'
+    }]
+    arr.forEach(function (item) {
+      axios
+        .get(item.api)
+        .then(function (res) {
+          console.log(res)
+          commit({
+            type: 'getBook',
+            tag: item.tag,
+            res: res.data
+          })
         })
-      })
-      .catch(function (err) {
-        console.log(err)
-      })
+    })
   }
 }
 

@@ -16,9 +16,9 @@
       <span slot="no-more">
         没有更多内容了
       </span>
-      <!-- 没有相过结果，或者接口出错 -->
+      <!-- 没有相关结果，或者接口出错 -->
       <span slot="no-results">
-        没有相过结果
+        没有相关结果
       </span>
     </infinite-loading>
   </div>
