@@ -3,7 +3,9 @@ import axios from 'axios'
 const state = {
   hotMovie: [],
   topMovie: [], // 免费电影
-  newMovie: []
+  newMovie: [],
+  allMovie: [], // 全部电影
+  allMoviePage: 0
 }
 
 const mutations = {
@@ -19,6 +21,10 @@ const mutations = {
         state.newMovie = payload.res
         break
     }
+  },
+  loadMoreMovie (state, payload) {
+    state.allMoviePage += 10
+    state.allMovie = state.allMovie.concat(payload.res)
   }
 }
 
@@ -45,6 +51,32 @@ const actions = {
             tag: item.tag,
             res: res.data
           })
+        })
+    })
+  },
+  loadMoreMovie ({commit, state}, payload) {
+    let movieType = {
+      nowintheater: 'in_theaters',
+      watchonline: 'top250',
+      latest: 'coming_soon'
+    }
+    return new Promise(function (resolve, reject) {
+      axios
+        .get(`/api/movie/${movieType[payload.tag]}?start=${state.allMoviePage}&count=10`)
+        .then(function (res) {
+          commit({
+            type: 'loadMoreMovie',
+            res: res.data.subjects
+          })
+          resolve(res)
+        })
+        .catch(function (err) {
+          console.log(err)
+          commit({
+            type: 'loadMoreMovie',
+            res: err.response
+          })
+          reject(err)
         })
     })
   }

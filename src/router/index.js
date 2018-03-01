@@ -10,6 +10,7 @@ import SearchResPage from '../pages/SearchResPage.vue' // 搜索结果页面
 import Subject from '../pages/Subject.vue' // 搜索后点击查看的详情
 import Status from '../pages/Status' // 状态页
 import Group from '../pages/GroupPage' // 小组页面
+import MovieMore from '../pages/MovieMore' // 更多电影
 
 Vue.use(Router)
 
@@ -30,6 +31,10 @@ export default new Router({
       path: '/movie',
       name: 'Movie',
       component: Movie
+    }, {
+      path: 'movie/:type',
+      name: 'MovieMore',
+      component: MovieMore
     }, {
       path: 'detail/:id',
       name: 'Detail',

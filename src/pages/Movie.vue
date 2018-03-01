@@ -1,8 +1,8 @@
 <template>
   <div class="movie">
-    <scroller title="影院热映" type="hasCover" :items="hotMovie.subjects" class="movie__hot-movie"></scroller>
-    <scroller title="免费在线观影" type="hasCover" :items="topMovie.subjects" class="movie__hot-movie"></scroller>
-    <scroller title="新片速递" type="hasCover" :items="newMovie.subjects" class="movie__hot-movie"></scroller>
+    <scroller title="影院热映" type="nowintheater" :items="hotMovie.subjects" class="movie__hot-movie"></scroller>
+    <scroller title="免费在线观影" type="watchonline" :items="topMovie.subjects" class="movie__hot-movie"></scroller>
+    <scroller title="新片速递" type="latest" :items="newMovie.subjects" class="movie__hot-movie"></scroller>
   </div>
 </template>
 

@@ -3,7 +3,9 @@
   <div class="scroller">
     <div class="scroller__header">
       <span class="scroller__type">{{title}}</span>
-      <span class="scroller__more">更多</span>
+      <router-link :to="type" append>
+        <span class="scroller__more">更多</span>
+      </router-link>
     </div>
     <div class="scroller__content">
         <router-link :to="'subject/' + item.id" append  v-for="(item, index) in items" :key="index">
